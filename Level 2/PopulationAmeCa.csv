@@ -1,0 +1,26 @@
+2015 World Population Statistics: Caribbean,,,,,,,,,,
+Data Source: United Nation Population Division: http://esa.un.org/unpd/wpp/Excel-Data/population.htm,,,,,,,,,,
+Note: Rows for 9 countries or special regions are removed due to missing data,,,,,,,,,,
+The table below in two shades of orange is to be visualized at LEVEL 2,,,,,,,,,,
+,,,,,,,,,,
+,min,92,44,48,-0.14,1.75,22.98,38.76,35.17,9.05
+,max,11390,5722,5668,1.45,16.64,46.14,660.97,86.39,33.13
+,unit,K,K,K,%(+/-),per 1000,year-old,p/km^2,ratio,ratio
+Region,Country or SR,P-Both,P-Male,P-Female,Rate,RNPI,Mdn-Age,Density,Child-D,Old-D
+Carib,Antigua and Barbuda,92,44,48,1.03,10.37,30.95,208.68,54.66,11.94
+Carib,Aruba,104,49,55,0.45,2.02,40.24,577.16,41.16,19.61
+Carib,Bahamas,388,190,198,1.45,9.36,32.42,38.76,45.76,13.16
+Carib,Barbados,284,136,148,0.33,1.75,38.54,660.97,43.06,23.61
+Carib,Cuba,11390,5722,5668,0.14,2.84,41.22,107.00,35.17,21.96
+Carib,Curaçao,157,73,85,1.26,5.10,40.53,354.06,42.43,24.82
+Carib,Dominican Republic,10528,5246,5282,1.24,15.34,26.11,217.89,72.45,12.29
+Carib,Grenada,107,54,53,0.41,12.15,27.22,314.19,62.17,12.51
+Carib,Guadeloupe,468,217,252,0.50,6.65,39.45,277.19,50.94,25.78
+Carib,Haiti,10711,5297,5414,1.38,16.64,22.98,388.65,86.39,9.05
+Carib,Jamaica,2793,1391,1402,0.38,10.77,29.12,257.93,57.99,15.89
+Carib,Martinique,396,182,215,0.09,3.75,46.14,373.99,40.44,33.13
+Carib,Puerto Rico,3683,1771,1913,-0.14,4.17,36.29,415.25,44.53,24.45
+Carib,Saint Lucia,185,91,94,0.84,8.35,31.23,303.28,53.59,15.19
+Carib,Saint Vincent and the Grenadines,109,55,54,0.03,9.41,29.83,280.67,56.51,12.38
+Carib,Trinidad and Tobago,1360,671,689,0.48,5.50,33.85,265.12,42.76,14.83
+Carib,United States Virgin Islands,106,51,56,-0.02,6.61,41.02,303.69,48.45,31.71

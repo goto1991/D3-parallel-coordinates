@@ -1,0 +1,121 @@
+<!doctype html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+</head>
+<title>Level 3</title>
+<link rel="stylesheet" type="text/css" href="../d3.parcoords.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+<style>
+  /* data table styles */
+#grid { height: 198px; }
+  .row, .header { clear: left; font-size: 12px; line-height: 18px; height: 18px; }
+  .row:nth-child(odd) { background: rgba(0,0,0,0.05); }
+  .header { font-weight: bold; }
+  .cell { float: left; overflow: hidden; white-space: nowrap; width: 100px; height: 18px; }
+  .col-0 { width: 180px; }
+</style>
+<script src="lib/d3.min.js"></script>
+<script src="lib/d3.js"></script>
+<script src="lib/d3.svg.multibrush.js"></script>
+<script src="../d3.parcoords.js"></script>
+<script src="lib/divgrid.js"></script>
+<div id="example" class="parcoords" style="width:1500px;height:600px;"></div>
+<div id="grid"></div>
+
+<p>
+  <label for="sltBrushMode">Brush mode:</label>
+  <select id="sltBrushMode">
+  </select>
+  <label id="lblPredicate" for="sltPredicate">Predicate:</label>
+  <select id="sltPredicate">
+    <option>AND</option>
+    <option>OR</option>
+  </select>
+  <button id="btnReset">Reset Brushes</button>
+</p>
+
+<script id="brushing">
+// quantitative color scale
+var blue_to_brown = d3.scale.linear()
+  .domain([0, 4, 8, 12, 16, 20])
+  .range(["blue", "red", "green", "black", "orange", "brown"])
+  .interpolate(d3.interpolateLab);
+
+var color = function(d) { return blue_to_brown(d['Region']); };
+
+var parcoords = d3.parcoords()("#example")
+    .color(color)
+    .alpha(0.4);
+
+// load csv file and create the chart
+d3.csv('data/WorldEconomy1990-2015.csv', function(data) {
+  parcoords
+    .data(data)
+    .render()
+    .reorderable()
+    .brushMode("1D-axes");  // enable brushing
+
+  // create data table, row hover highlighting
+  var grid = d3.divgrid();
+  d3.select("#grid")
+          .datum(data.slice(0,10))
+          .call(grid)
+          .selectAll(".row")
+          .on({
+            "mouseover": function(d) { parcoords.highlight([d]) },
+            "mouseout": parcoords.unhighlight
+          });
+
+  // update data table on brush event
+  parcoords.on("brush", function(d) {
+    d3.select("#grid")
+      .datum(d.slice(0,10))
+      .call(grid)
+      .selectAll(".row")
+      .on({
+         "mouseover": function(d) { parcoords.highlight([d]) },
+         "mouseout": parcoords.unhighlight
+       });
+  });
+});
+
+var sltBrushMode = d3.select('#sltBrushMode')
+
+sltBrushMode.selectAll('option')
+        .data(parcoords.brushModes())
+        .enter()
+        .append('option')
+        .text(function(d) { return d; });
+
+sltBrushMode.on('change', function() {
+    parcoords.brushMode(this.value);
+    switch(this.value) {
+        case 'None':
+            d3.select("#pStrums").style("visibility", "hidden");
+            d3.select("#lblPredicate").style("visibility", "hidden");
+            d3.select("#sltPredicate").style("visibility", "hidden");
+            d3.select("#btnReset").style("visibility", "hidden");
+            break;
+        case '2D-strums':
+            d3.select("#pStrums").style("visibility", "visible");
+            break;
+        default:
+            d3.select("#pStrums").style("visibility", "hidden");
+            d3.select("#lblPredicate").style("visibility", "visible");
+            d3.select("#sltPredicate").style("visibility", "visible");
+            d3.select("#btnReset").style("visibility", "visible");
+            break;
+    }
+});
+
+sltBrushMode.property('value', '1D-axes');
+
+d3.select('#btnReset').on('click', function() {parcoords.brushReset();})
+d3.select('#sltPredicate').on('change', function() {
+    parcoords.brushPredicate(this.value);
+});
+</script>
+
+
+
